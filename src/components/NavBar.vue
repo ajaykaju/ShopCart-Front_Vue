@@ -7,7 +7,7 @@
     <search-bar class="navbar_search"></search-bar>
     <div class="top_navigations">
       <div class="user_welcome">
-        <span>Hello,</span><span class="user_name mouse_cursor"> Sign in</span>
+        <span>Hello,</span><span class="user_name mouse_cursor"> Abhinandan</span>
       </div>
       <div class="avatar mouse_cursor"><img src="" /></div>
       <div class="cart mouse_cursor">

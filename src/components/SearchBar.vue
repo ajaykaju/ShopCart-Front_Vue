@@ -1,11 +1,12 @@
 <template>
-  <div class="search_bar">
+  <div class="search_bar" :style="{ boxShadow : isBoxShadow }">
     <span class="search_icon"><img :src="searchIcon" /></span>
     <input
       @focus="searchIconChanger"
       @blur="searchIconChanger"
       type="text"
       class="search_text"
+      name="search_text"
       placeholder="Search for products"
     />
     <span class="filter_icon mouse_cursor"
@@ -22,6 +23,12 @@ import filterIcon from "../assets/icons/sliders.svg";
 import filterIconBlue from "../assets/icons/sliders_blue.svg";
 
 export default {
+  props: {
+    boxShadow: {
+      type: Boolean,
+      default: true
+    }
+  },
   data() {
     return {
       isSearchFocused: false,
@@ -37,6 +44,10 @@ export default {
       if (this.isFilterFocused) return filterIconBlue;
       else return filterIcon;
     },
+    isBoxShadow() {
+      if(this.boxShadow) return '0 0 4px 0px rgba( 0, 0, 0, 0.1)'
+      else return '0px'
+    }
   },
   methods: {
     searchIconChanger() {
@@ -54,39 +65,26 @@ export default {
     display: inline-flex
     place-self: center
     border-radius: 20px
-    height: 30px
+    height: 35px
     background: #ffffff
     padding: 5px 10px
-    box-shadow: 0 0 4px 0px rgba( 0, 0, 0, 0.1)
+    width: 100%
     .search_icon, .filter_icon, .search_text
         align-items: center
         align-self: center
         align-content: center
         display: flex
         img
-            width: 20px
-            opacity: 0.8
+            width: 23px
+            opacity: 1
     .search_icon
     .search_text
         border: none
         margin: 0 5px 0 5px
-        width: 500px
         outline: none
         height: 20px
         caret-color: #2196f3
         font-size: 15px
+        width: 100%
     .filter_icon
-
-@media (min-width: 1063px)
-    .search_bar
-        .search_text
-            width: 500px
-@media (min-width: 948px) and (max-width: 1062px)
-    .search_bar
-        .search_text
-            width: 400px
-@media (min-width: 0px) and (max-width: 947px)
-    .search_bar
-        .search_text
-            width: 250px
 </style>
