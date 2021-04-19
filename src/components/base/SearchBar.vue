@@ -16,11 +16,11 @@
 </template>
 
 <script>
-import searchIcon from "../assets/icons/search.svg";
-import searchIconBlue from "../assets/icons/search_blue.svg";
+import searchIcon from "../../assets/icons/search.svg";
+import searchIconBlue from "../../assets/icons/search_blue.svg";
 
-import filterIcon from "../assets/icons/sliders.svg";
-import filterIconBlue from "../assets/icons/sliders_blue.svg";
+import filterIcon from "../../assets/icons/sliders.svg";
+import filterIconBlue from "../../assets/icons/sliders_blue.svg";
 
 export default {
   props: {

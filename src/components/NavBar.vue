@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import SearchBar from "./SearchBar.vue";
+import SearchBar from "./base/SearchBar.vue";
 export default {
   components: { SearchBar },
   data() {

@@ -8,7 +8,7 @@
 
 <script>
 import NavBar from "./components/NavBar.vue";
-import SearchBar from "./components/SearchBar.vue";
+import SearchBar from "./components/base/SearchBar.vue";
 
 export default {
   components: { NavBar, SearchBar },
