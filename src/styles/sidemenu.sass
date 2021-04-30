@@ -1,0 +1,82 @@
+@media ( min-width:  733px)
+    .side_menu_background
+        .side_menu
+            .menu_top
+                .button_and_logo
+                    padding: 36px 20px
+                    .logo
+                        font-size: 25px
+
+@media (max-width: 732px)
+    .side_menu_background
+        .side_menu
+            .menu_top
+                .button_and_logo
+                    padding: 33px 20px
+                    .logo
+                        font-size: 20px
+
+.side_menu_background
+    display: grid
+    grid-template-columns: 250px auto
+    .side_menu
+        width: 250px
+        background-color: rgba(245, 245, 245, 1)
+        opacity: 1
+        height: 100%
+        z-index: 2
+        height: 100%
+        position: fixed
+        .menu_top
+            background: rgba(255, 255,255 , 1)
+            .button_and_logo
+                display: inline-flex
+                width: 250px
+                .menu_button
+                    place-self: center
+                    img
+                        width: 25px
+                        padding: 10px
+                .logo
+                    font-weight: 500
+                    place-self: center
+                    margin-left: 10px
+                    color: #rgba(35, 48, 48, 1)
+                    img
+                        width: 150px// Logo Image
+    .outerSpace
+        background: rgba(36, 36, 36, 0.8)
+        z-index: 1
+        height: 100%
+        width: 100%
+        position: fixed
+.sideMenu-enter-active
+    animation: bounceEnter 1s ease-out
+.sideMenu-leave-active
+    animation: linearLeave 1s ease-in
+.outSpace-enter-active
+    animation: outSpaceOpacity 0.5s ease-out
+.outSpace-leave-active
+    animation: outSpaceOpacity 0.5s ease-in reverse
+@keyframes linearLeave
+    0%
+        transform: translateX(0)
+    100%
+        transform: translateX(-2000px)
+@keyframes bounceEnter
+    0%
+        opacity: 0
+        transform: translateX(-2000px)
+    60%
+        opacity: 1
+        transform: translateX(30px)
+    80%
+        transform: translateX(-10px)
+    100%
+        transform: translateX(0)
+
+@keyframes outSpaceOpacity
+    0%
+        opacity: 0
+    100%
+        opacity: 1
