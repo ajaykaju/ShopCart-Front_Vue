@@ -1,12 +1,44 @@
 @font-face
-    font-family: 'Open Sans', sans-serif
-    src: url('./assets/fonts/OpenSans-Regular.ttf')
-
+    font-family: 'Roboto-Black'
+    src: url('./assets/fonts/Roboto-Black.ttf')
+@font-face
+    font-family: 'Roboto-BlackItalic'
+    src: url('./assets/fonts/Roboto-BlackItalic.ttf')
+@font-face
+    font-family: 'Roboto-Bold'
+    src: url('./assets/fonts/Roboto-Bold.ttf')
+@font-face
+    font-family: 'Roboto-BoldItalic'
+    src: url('./assets/fonts/Roboto-BoldItalic.ttf')
+@font-face
+    font-family: 'Roboto-Italic'
+    src: url('./assets/fonts/Roboto-Italic.ttf')
+@font-face
+    font-family: 'Roboto-Light'
+    src: url('./assets/fonts/Roboto-Light.ttf')
+@font-face
+    font-family: 'Roboto-LightItalic'
+    src: url('./assets/fonts/Roboto-LightItalic.ttf')
+@font-face
+    font-family: 'Roboto-Medium'
+    src: url('./assets/fonts/Roboto-Medium.ttf')
+@font-face
+    font-family: 'Roboto-MediumItalic'
+    src: url('./assets/fonts/Roboto-MediumItalic.ttf')
+@font-face
+    font-family: 'Roboto-Regular'
+    src: url('./assets/fonts/Roboto-Regular.ttf')
+@font-face
+    font-family: 'Roboto-Thin'
+    src: url('./assets/fonts/Roboto-Thin.ttf')
+@font-face
+    font-family: 'Roboto-ThinItalic'
+    src: url('./assets/fonts/Roboto-ThinItalic.ttf')
 body
     margin: 0px
     padding: 0px
     background-color: #ffffff
-    font-family: 'Open Sans', sans-serif
+    font-family: 'Roboto-Regular'
 .mouse_cursor
     cursor: pointer
 
@@ -15,6 +47,25 @@ body
     grid-template-rows: 1fr auto
     padding: 30px
     background-color: rgba(245, 245, 245, 1)
+
+.minNav
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    z-index: 100
+.minNavBar-enter-active, .minNavBar-leave-active
+     transition: 0.1s all ease-out
+.minNavBar-enter, .minNavBar-leave-to
+    opacity: 0
+
+@keyframes minNavBarEnter
+    0%
+        transform: translateY(-10px)
+    60%
+        transform: translateY(550px)    
+    100%
+        transform: translateY(0px)
 
 @media ( max-width:  732px)
     .content

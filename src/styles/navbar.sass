@@ -20,30 +20,40 @@
                 font-size: 20px
         .navbar_search,.user_welcome
             display: none
-
+.navSmall
+    position: fixed
+    z-index: 1
+    left: 0
+    right: 0
+    top: 0
+    padding: 10px 20px
+    height: 50px
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.1)
+.navLarge
+    padding: 32px 20px
 .top_bar
+    display: grid
     justify-items: right
     background: #ffffff
-    padding: 32px 20px
-    display: grid
     .top_left
         display: inline-flex
         justify-self: left
         .menu_button
             place-self: center
-            opacity: 1
-            box-shadow: 0px 0px 4px 0px rgba( 0, 0, 0, 0.1)
-            border-radius: 8px
+            width: 30px
+            height: 30px
+            transition: all .2s ease-in-out
+            display: grid
             img
                 width: 25px
                 place-self: center
                 padding: 10px
             &:hover
-                box-shadow: 0px 0px 16px 0px rgba( 0, 0, 0, 0.1)
+                transform: scale(1.1)
         .logo
             font-weight: 500
             place-self: center
-            margin-left: 10px
+            margin-left: 15px
             color: #rgba(35, 48, 48, 1)
             img
                 width: 150px// Logo Image
@@ -76,4 +86,3 @@
                 padding: 3px
             img
                 width: 35px
-
