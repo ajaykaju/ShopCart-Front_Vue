@@ -1,0 +1,263 @@
+.products_scroll
+    display: grid
+    grid-template-rows: 1fr auto
+    margin-top: 10px
+    .top_of_scroll
+        display: grid
+        grid-auto-flow: column
+        background: #fff
+        padding: 5px 10px
+        border-radius: 10px
+        margin: 0 0 5px 0
+        .products_title
+            width: fit-content
+            height: fit-content
+            display: grid
+            align-self: center
+            font-family: 'Roboto-Medium'
+        .more
+            align-self: center
+            justify-self: end
+            padding: 10px
+            cursor: pointer
+            transition: opacity .3s ease-out
+            opacity: 0.8
+            display: grid
+            grid-auto-flow: column
+            img
+                align-self: center
+                margin-left: 1px
+            &:hover
+                opacity: 1
+    .product_large_scroll
+        position: relative
+        display: grid
+        grid-auto-flow: column
+        .pCardLargeControl_Left, .pCardLargeControl_Right
+            background: rgba(36, 36,36, 1)
+            align-self: center
+            border-radius: 100%
+            display: grid
+            z-index: 1
+            box-shadow: 0px 1px 2px rgba(0,0,0,0.15)
+            transition: all 0.1s ease-in-out
+            position: absolute
+            &::after
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3)
+                transition: opacity 0.1s ease-in-out
+            &:hover
+                transform: scale(1.1, 1.1)
+            &:hover::after
+                opacity: 1
+            img
+                place-self: center
+        .pCardLargeControl_Left
+            left: 0
+            margin-left: -25px
+        .pCardLargeControl_Right
+            right: 0
+            margin-right: -25px
+        .animation_wrapper
+            overflow: hidden
+            width: 100%
+        .product_container
+            gap: 0 8px
+            display: flex
+            width: 100%
+            overflow: clip
+            overflow-x: auto
+            border-radius: 8px
+            scroll-behavior: smooth
+            &::-webkit-scrollbar
+                width: 0px
+                height: 0px
+            .productCardLarge
+                border-radius: 20px
+                min-width: 200px
+                max-width: 200px
+                height: 300px
+                background: #ffffff
+                box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.1)
+                display: grid
+                padding: 21px
+                position: relative
+                border-bottom: 2px solid #2196f3
+                overflow: hidden
+                .pImageContainer
+                    display: grid
+                    width: 195px
+                    height: 120px
+                    border-radius: 20px
+                    justify-self: center
+                    position: relative
+                    overflow: hidden
+                    background: #fff
+                    img
+                        position: absolute
+                        width: 150px
+                        place-self: center
+                .rate_and_count
+                    position: absolute
+                    display: inline-flex
+                    font-size: 12px
+                    font-weight: bold
+                    gap: 0 3px
+                    .rating
+                        width: 20px
+                        height: fit-content
+                        background: green
+                        color: #fff
+                        padding: 3px 10px 3px 20px
+                        border-radius: 2px
+                        border-top-left-radius: 10px
+                        place-self: center
+                    .count
+                        color: rgba(36, 36, 36, 0.6)
+                        align-self: center
+                .fav
+                    position: absolute
+                    top: 120px
+                    right: 20px
+                    justify-self: end
+                    z-index: 1
+                    display: inline-flex
+                    align-content: center
+                    align-items: center
+                    cursor: pointer
+                    box-shadow: 0 1px 2px rgba(0,0,0,0.15)
+                    transition: all 0.1s ease-in-out
+                    &::after
+                        box-shadow: 0 5px 15px rgba(0,0,0,0.3)
+                        transition: opacity 0.1s ease-in-out
+                    &:hover
+                        transform: scale(1.1, 1.1)
+                    &:hover::after
+                        opacity: 1
+                    .favtag
+                        position: absolute
+                        transform: rotate(90deg)
+                        align-self: center
+                        width: 80px
+                        right: -60px
+                        z-index: -1
+                    .favcontent
+                        position: absolute
+                        display: inline-flex
+                        gap: 0 2px
+                        font-size: 14px
+                        font-weight: 600
+                        padding: 2px 6px
+                        right: -20px
+                        img
+                            align-self: center
+                            width: 20px
+                .card_title
+                    font-size: 15px
+                    justify-self: center
+                    text-align: left
+                    font-family: 'Roboto-Medium'
+                .card_description
+                    font-size: 11px
+                    font-family: 'Roboto-Light'
+                .card_bottom
+                    display: grid
+                    grid-auto-flow: column
+                    grid-template-columns: auto auto 1fr
+                    align-items: center
+                    gap: 0 5px
+                    align-self: flex-end
+                    .price, .offer
+                        justify-self: left
+                        font-family: 'Roboto-Medium'
+                        color: rgba(0, 0, 0, 1)
+                    .offer
+                        text-decoration: line-through
+                        opacity: 0.5
+                    .addToCart
+                        background: #2196f3
+                        width: fit-content
+                        padding: 10px
+                        height: fit-content
+                        border-radius: 100%
+                        display: grid
+                        justify-self: end
+                        box-shadow: 0 1px 2px rgba(0,0,0,0.15)
+                        transition: all 0.1s ease-in-out
+                        cursor: pointer
+                        &::after
+                            box-shadow: 0 5px 15px rgba(0,0,0,0.3)
+                            transition: opacity 0.1s ease-in-out
+                        &:hover
+                            transform: scale(1.1, 1.1)
+                        &:hover::after
+                            opacity: 1
+                        img
+                            width: 25px
+                            align-self: center
+.leftScrollOverAnim
+    animation: leftScrollOver 1s ease-out
+.rightScrollOverAnim
+    animation: rightScrollOver 1s ease-out
+
+@keyframes rightScrollOver
+    0%
+        transform: translateX(0px)
+    60%
+        transform: translateX(-30px)
+    100%
+        transform: translateX(0px)
+
+@keyframes leftScrollOver
+    0%
+        // transform: translateX(0)
+        margin-left: 0px
+    60%
+        margin-left: 30px
+    100%
+        margin-left: 0px
+
+@media (min-width: 733px)
+    .products_scroll
+        .product_large_scroll
+            .pCardLargeControl_Left, .pCardLargeControl_Right
+                width: 20px
+                height: 20px
+                padding: 10px
+                img
+                    width: 20px
+            .pCardLargeControl_Left
+                margin-left: -25px
+            .pCardLargeControl_Right
+                margin-right: -25px
+@media (max-width: 732px)
+    .products_scroll
+        .product_large_scroll
+            .pCardLargeControl_Left, .pCardLargeControl_Right
+                width: 15px
+                height: 15px
+                padding: 10px
+                img
+                    width: 15px
+            .pCardLargeControl_Left
+                margin-left: -12px
+            .pCardLargeControl_Right
+                margin-right: -12px
+
+@media (min-width: 936px)
+    .products_scroll
+        .top_of_scroll
+            .products_title
+                font-size: 22px
+            .more
+                font-size: 15px
+                img
+                    width: 12px
+@media (max-width: 936px)
+    .products_scroll
+        .top_of_scroll
+            .products_title
+                font-size: 18px
+            .more
+                font-size: 13px
+                img
+                    width: 10px

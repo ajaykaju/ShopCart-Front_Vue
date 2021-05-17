@@ -20,7 +20,7 @@
         <div class="avatar mouse_cursor"><img src="" /></div>
         <div class="cart mouse_cursor">
           <span class="cart_items">56</span>
-          <img src="../assets/icons/shopping-cart.png" />
+          <img src="../assets/icons/shopping-cart-black.svg" />
         </div>
       </div>
     </nav>

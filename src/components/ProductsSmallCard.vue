@@ -1,21 +1,52 @@
 <template>
-<div class="products_scroll">
-  <div class="products_title">Top Selection</div>
-  <div class="product_small_scroll">
-    <div class="pCardSmallControl_Left" @click="left_scroll">
-      <img src="../assets/icons/left-chevron.svg" />
+  <div class="products_scroll">
+    <div class="top_of_scroll">
+      <div class="products_title">Top Selection</div>
+      <div class="more">
+        View All
+        <img draggable="false" src="../assets/icons/right-arrow-double.svg" />
+      </div>
     </div>
-    <div class="pCardSmallControl_Right" @click="right_scroll">
-      <img src="../assets/icons/right-chevron.svg" />
-    </div>
-    <div class="product_container" ref="scrollContainer">
-      <div class="productCardSmall" v-for="i in 10" :key="i">
-        <img src="https://images-na.ssl-images-amazon.com/images/I/71FMlrA8TiL._SL1500_.jpg">
-        <div class="card_title">AFROJACK Men's Airsocks Explorer Running Shoes (Black)</div>
+    <div class="products_and_control_wrapper">
+      <div class="pCardSmallControl_Left" @click="left_scroll">
+        <img src="../assets/icons/left-chevron.svg" />
+      </div>
+      <div class="product_small_scroll">
+        <div class="product_container" ref="scrollContainer">
+          <div class="productCardSmall" v-for="i in 10" :key="i">
+            <div class="rate_and_count">
+              <div class="rating">4.8</div>
+              <div class="count">(35)</div>
+            </div>
+            <div class="fav">
+              <img class="favtag" src="../assets/icons/tag.svg" />
+              <div class="favcontent">
+                <img src="../assets/icons/add-to-fav.svg" />
+              </div>
+            </div>
+            <div class="card_content">
+              <img
+                src="https://rukminim1.flixcart.com/image/150/150/ko62xzk0/plant-seed/4/k/y/2050-f-40-aero-seeds-original-imag2zjznggbyzxd.jpeg?q=70"
+              />
+              <div class="card_title">
+                AFROJACK Men's Airsocks Explorer Running Shoes
+              </div>
+            </div>
+            <div class="card_bottom">
+              <div class="price">$800</div>
+              <div class="offer">$1000</div>
+              <div class="addToCart">
+                <img src="../assets/icons/shopping-cart-white.svg" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="pCardSmallControl_Right" @click="right_scroll">
+        <img src="../assets/icons/right-chevron.svg" />
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -37,61 +68,5 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.products_scroll
-  display: grid
-  grid-template-rows: 1fr auto
-  .products_title
-    font-size: 22px
-    padding: 0 0 10px 0
-  .product_small_scroll
-    position: relative
-    overflow: hidden
-    .pCardSmallControl_Left, .pCardSmallControl_Right
-      position: absolute
-      background: rgba(0, 0, 0, 0.1)
-      height: 100%
-      width: 3%
-      img
-        width: 25px
-        place-self: center
-      &:hover
-        background: rgba(0, 0, 0, 0.3)
-    .pCardSmallControl_Left
-      left: 0
-    .pCardSmallControl_Right
-      right: 0px
-    .product_container
-      gap: 0 8px
-      display: flex
-      width: 100%
-      overflow: clip
-      overflow-x: auto
-      &::-webkit-scrollbar
-        width: 0px
-        height: 0px
-      .productCardSmall
-        border-radius: 8px
-        min-width: 150px
-        max-width: 150px
-        height: 150px
-        background: #ffffff
-        box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.1)
-        display: grid
-        padding: 10px
-        img
-          width: 100px
-          justify-self: center
-        .card_title
-          font-size: 12px
-          justify-self: center
-          text-align: left
-
-@media (min-width: 733px)
-  .products_scroll
-    .pCardSmallControl_Left, .pCardSmallControl_Right
-      display: grid
-@media (max-width: 732px)
-  .products_scroll
-    .pCardSmallControl_Left, .pCardSmallControl_Right
-      display: none
+@import '../styles/productsSmallCards'
 </style>

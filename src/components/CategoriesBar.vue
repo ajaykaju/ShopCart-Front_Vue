@@ -60,12 +60,12 @@ export default {
     border: 0px
     cursor: pointer
     height: 100%
+    transition: all 0.1s ease-in-out
     img
       width: 25px
       place-self: center
     &:hover
-      img
-        width: 28px
+      transform: scale(1.1,1.1)
 @media (min-width: 2175px)
   .category_bar
     grid-template-columns: auto
