@@ -1,28 +1,33 @@
 <template>
   <categories-bar></categories-bar>
   <image-carousel></image-carousel>
-  <products-large-cards></products-large-cards>
+  <header-tab title="Deals of the Day"></header-tab>
+  <cards-list :products="products"></cards-list>
   <ad-banner-min :images="adbanner1"></ad-banner-min>
   <offer-categories-and-adcard></offer-categories-and-adcard>
   <ad-banner-min :images="adbanner2"></ad-banner-min>
-  <products-small-card></products-small-card>
+  <header-tab title="Exclusive For You"></header-tab>
+  <cards-list :isLarge="false" :products="products"></cards-list>
 </template>
 
 <script>
 import AdBannerMin from "../components/AdBannerMin.vue";
+import HeaderTab from "../components/base/HeaderTab.vue";
+import CardsList from "../components/CardsList.vue";
 import CategoriesBar from "../components/CategoriesBar.vue";
 import ImageCarousel from "../components/ImageCarousel.vue";
 import OfferCategoriesAndAdcard from "../components/OfferCategoriesAndAdcard.vue";
-import ProductsLargeCards from "../components/ProductsLargeCards.vue";
-import ProductsSmallCard from "../components/ProductsSmallCard.vue";
+
+import productsList from "../components/products.json";
+
 export default {
   components: {
     ImageCarousel,
-    ProductsLargeCards,
     AdBannerMin,
-    ProductsSmallCard,
     CategoriesBar,
     OfferCategoriesAndAdcard,
+    CardsList,
+    HeaderTab,
   },
   data() {
     return {
@@ -37,6 +42,11 @@ export default {
         small: `adbanner2_small.png`,
       },
     };
+  },
+  computed: {
+    products() {
+      return productsList.products;
+    },
   },
 };
 </script>

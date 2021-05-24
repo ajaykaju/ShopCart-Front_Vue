@@ -53,7 +53,7 @@
             ></list-block>
           </div>
           <div class="menu_contents" v-else>
-            <div class="item_top" @click="itemOpenDecider(null)">
+            <div class="item_top mouse_cursor" @click="itemOpenDecider(null)">
               Back<img src="../assets/icons/left-back-black.svg" />
             </div>
             <list-block

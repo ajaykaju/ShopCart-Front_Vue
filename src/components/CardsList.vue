@@ -1,11 +1,4 @@
 <template>
-  <div class="products_header">
-    <div class="products_title">Deals of the Day</div>
-    <div class="products_more mouse_cursor">
-      View All
-      <img draggable="false" src="../assets/icons/right-arrow-double.svg" />
-    </div>
-  </div>
   <div class="cards_list_container">
     <div
       class="cards_list_left_control"
@@ -31,14 +24,18 @@
         ]"
       >
         <div
-          class="cards_list_item"
-          :class="isLarge ? 'card_large_item' : 'card_small_item'"
-          v-for="i in 10"
+          v-for="(product, i) in products"
           :key="i"
+          class="cards_list_item"
+          :class="{
+            card_large_item: isLarge,
+            card_small_item: !isLarge,
+            item_marger: i !== products.length,
+          }"
         >
           <div class="cli_rate_and_count">
-            <div class="cli_rating">1.8</div>
-            <div class="cli_count">(35)</div>
+            <div class="cli_rating">{{ product.ratingAndCount.rating }}</div>
+            <div class="cli_count">({{ product.ratingAndCount.count }})</div>
           </div>
           <div class="cli_fav mouse_cursor">
             <img class="cli_favtag" src="../assets/icons/tag.svg" />
@@ -47,20 +44,17 @@
             </div>
           </div>
           <div class="cli_image">
-            <img
-              src="https://rukminim1.flixcart.com/image/150/150/ko62xzk0/plant-seed/4/k/y/2050-f-40-aero-seeds-original-imag2zjznggbyzxd.jpeg?q=70"
-            />
+            <img :src="product.img" />
           </div>
           <div class="cli_title">
-            AFROJACK Men's Airsocks Explorer Running Shoes (Black)
+            {{ product.title }}
           </div>
           <div v-show="isLarge" class="cli_description">
-            This premium sockliner features higher rebound properties while
-            providing excellent
+            {{ product.description }}
           </div>
           <div class="cli_bottom">
-            <div class="cli_price">$3500</div>
-            <div class="cli_offer">$4000</div>
+            <div class="cli_price">${{ product.priceAndOffer.offer }}</div>
+            <div class="cli_offer">{{ product.priceAndOffer.price }}</div>
             <div class="cli_addToCart">
               <img src="../assets/icons/shopping-cart-white.svg" />
             </div>
@@ -106,29 +100,29 @@ export default {
     left_scroll() {
       let listScroll = this.$refs.listScroll;
 
-      listScroll.scrollLeft -= 400;
+      listScroll.scrollLeft -= this.isLarge ? 400 : 300;
       if (listScroll.scrollLeft === 0) this.scrollEvent();
     },
     right_scroll() {
       let listScroll = this.$refs.listScroll;
-      listScroll.scrollLeft += 400;
+      listScroll.scrollLeft += this.isLarge ? 400 : 300;
       if (
-        listScroll.scrollLeft ===
-        listScroll.scrollWidth - listScroll.clientWidth
-      )
+        Math.round(listScroll.scrollLeft) ===
+        Math.round(listScroll.scrollWidth - listScroll.clientWidth)
+      ) {
         this.scrollEvent();
+      }
     },
     scrollEvent() {
       let listScroll = this.$refs.listScroll;
       let maxScrollWidth = listScroll.scrollWidth - listScroll.clientWidth;
-
-      if (listScroll.scrollLeft === 0) {
+      if (Math.round(listScroll.scrollLeft) === 0) {
         this.isEndOfScrollLeft = true;
         setTimeout(() => {
           this.isEndOfScrollLeft = false;
         }, 1000);
       }
-      if (listScroll.scrollLeft === maxScrollWidth) {
+      if (Math.round(listScroll.scrollLeft) === Math.round(maxScrollWidth)) {
         this.isEndOfScrollRight = true;
         setTimeout(() => {
           this.isEndOfScrollRight = false;
@@ -149,5 +143,5 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import '../styles/test'
+@import '../styles/cardslist'
 </style>
