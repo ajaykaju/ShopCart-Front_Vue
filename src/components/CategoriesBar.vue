@@ -1,7 +1,7 @@
 <template>
   <div class="category_bar">
     <div class="categories">
-      <div class="item mouse_cursor" v-for="item in items" :key="item">
+      <div class="item mouse_cursor" v-for="item in categories" :key="item">
         <img v-if="item.image" :src="item.image" draggable="false" />
         <img
           draggable="false"
@@ -11,20 +11,30 @@
         <div class="title">{{ item.title }}</div>
       </div>
     </div>
-    <div class="more">
+    <div class="more" @click="showAllCateogories">
       <img draggable="false" src="../assets/icons/right-arrow-double.svg" />
     </div>
   </div>
 </template>
 
 <script>
-import itemData from "../components/categories.json";
+
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   data() {
     return {
-      items: itemData.items,
     };
+  },
+  methods: {
+    showAllCateogories() {
+      this.showMoreCateogoriesChanger();
+      this.isSideMenuChanger();
+    },
+    ...mapActions(["showMoreCateogoriesChanger", "isSideMenuChanger"]),
+  },
+  computed: {
+    ...mapGetters(["categories"]),
   },
 };
 </script>

@@ -25,6 +25,7 @@
   </div>
 </template>
 
+
 <script>
 import HeaderTab from "./base/HeaderTab.vue";
 export default {

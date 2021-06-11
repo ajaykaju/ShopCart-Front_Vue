@@ -1,8 +1,11 @@
 <template>
   <div class="side_menu_background">
     <transition name="sideMenu">
-      <div class="side_menu" v-show="decider">
-        <div class="menu_top" :class="isScrolled? 'menuTopScroll' : 'menuTopNormal'">
+      <div class="side_menu" id="side_menu" v-show="isSideMenu">
+        <div
+          class="menu_top"
+          :class="isScrolled ? 'menuTopScroll' : 'menuTopNormal'"
+        >
           <div class="button_and_logo">
             <div class="menu_button mouse_cursor" @click="menuDecider">
               <img src="../assets/icons/menu-01.png" />
@@ -13,7 +16,7 @@
         <div class="menu_profile mouse_cursor">
           <div class="circular">
             <div class="avatar"></div>
-            <div :class="{ circle: decider }">
+            <div :class="{ circle: isSideMenu }">
               <div class="bar left">
                 <div class="progress"></div>
               </div>
@@ -22,9 +25,9 @@
               </div>
             </div>
           </div>
-          <div :class="{ user: true, userFocus: decider }">
+          <div :class="{ user: true, userFocus: isSideMenu }">
             <span>Hello</span>
-            <div>Abhinandan</div>
+            <div @click="cateogoriesFocuser">Abhinandan</div>
           </div>
         </div>
         <transition name="slideNormal">
@@ -42,7 +45,7 @@
               :items="items"
               @menuItemClick="itemOpenDecider"
               :isAnimated="true"
-              :listLimitNeeded="true"
+              :listLimitNeeded="catListLimitNeeded"
             ></list-block>
             <hr />
             <list-block
@@ -65,31 +68,28 @@
       </div>
     </transition>
     <transition name="outSpace" @click="menuDecider">
-      <div v-show="decider" class="outerSpace"></div>
+      <div v-show="isSideMenu" class="outerSpace"></div>
     </transition>
   </div>
 </template>
 
 <script>
-import itemsData from "../components/categories.json";
 import ListBlock from "./base/ListBlock.vue";
 
+import { mapGetters, mapActions } from "vuex";
 export default {
   components: { ListBlock },
   props: {
-    decider: {
+    isScrolled: {
       type: Boolean,
       default: false,
     },
-    isScrolled: {
-      type: Boolean,
-      default: false
-    }
   },
   data() {
     return {
       menuItemOpen: false,
       itemContents: null,
+      catListLimitNeeded: true,
       trending: [
         { title: "Best Sellers" },
         { title: "Top Offers" },
@@ -104,14 +104,16 @@ export default {
   },
   computed: {
     items() {
-      let items = itemsData.items.filter(
+      let items = this.categories.filter(
         (item) => item.title.toLowerCase().includes("offer") === false
       );
       return items;
     },
+    ...mapGetters(["showMoreCateogories", "isSideMenu","categories"]),
   },
   watch: {
-    decider(val) {
+    isSideMenu(val) {
+      if (this.showMoreCateogories) this.cateogoriesFocuser();
       if (val === true) {
         document.body.style.overflow = "hidden";
         window.addEventListener("keyup", this.escapeMenuCloser);
@@ -124,7 +126,15 @@ export default {
   },
   methods: {
     menuDecider() {
-      this.$emit("decider");
+      if (this.showMoreCateogories) {
+        this.showMoreCateogoriesChanger();
+        this.catListLimitNeeded = true;
+        setTimeout(() => {
+          const sideMenu = document.getElementById("side_menu");
+          sideMenu.scrollTop = 0;
+        }, 500);
+      }
+      this.isSideMenuChanger();
     },
     escapeMenuCloser(e) {
       if (e.key === "Escape") {
@@ -135,6 +145,14 @@ export default {
       this.itemContents = itemContents;
       this.menuItemOpen = !this.menuItemOpen;
     },
+    cateogoriesFocuser() {
+      this.catListLimitNeeded = false;
+      setTimeout(() => {
+        const sideMenu = document.getElementById("side_menu");
+        sideMenu.scrollTop = 370;
+      }, 100);
+    },
+    ...mapActions(["isSideMenuChanger", "showMoreCateogoriesChanger"]),
   },
 };
 </script>

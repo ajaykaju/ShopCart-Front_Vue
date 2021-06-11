@@ -18,7 +18,7 @@ import CategoriesBar from "../components/CategoriesBar.vue";
 import ImageCarousel from "../components/ImageCarousel.vue";
 import OfferCategoriesAndAdcard from "../components/OfferCategoriesAndAdcard.vue";
 
-import productsList from "../components/products.json";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
@@ -44,9 +44,7 @@ export default {
     };
   },
   computed: {
-    products() {
-      return productsList.products;
-    },
+    ...mapGetters(["products"]),
   },
 };
 </script>
