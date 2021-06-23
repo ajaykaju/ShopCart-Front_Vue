@@ -3,13 +3,20 @@ import { createStore } from "vuex";
 import productList from "../assets/dummyData/productList.json";
 import categoryList from "../assets/dummyData/categories.json";
 
+import signupModule from "./signup";
+
 export default createStore({
+  modules: {
+    signup: signupModule,
+  },
   state() {
     return {
       showMoreCateogories: false,
       isSideMenu: false,
       products: productList.products,
       categories: categoryList.items,
+
+      isAnotherPage: false,
     };
   },
   mutations: {

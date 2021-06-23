@@ -13,7 +13,9 @@
         <span>Hello,</span
         ><span class="user_name mouse_cursor"> Abhinandan</span>
       </div>
-      <div class="avatar mouse_cursor"><img src="" /></div>
+      <div @click="$router.push({ name: 'f1' })" class="avatar mouse_cursor">
+        <img src="" />
+      </div>
       <div class="cart mouse_cursor">
         <span class="cart_items">56</span>
         <img src="../assets/icons/shopping-cart-black.svg" />

@@ -1,26 +1,67 @@
-import { createRouter, createWebHistory} from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router";
 
-import Home from '../pages/Home'
-import Test from '../pages/Test'
+import Home from "../pages/Home";
+import Main from "../pages/innerPages/Main";
+
+import SignUp from "../pages/signup/SignUp";
+import FirstForm from "../pages/signup/FirstForm";
+import SecondForm from "../pages/signup/SecondForm";
+import MailConfirmation from "../pages/signup/MailConfirmation";
+
+import Test from "../pages/Test";
 
 const routes = [
   {
-    name: 'Home',
-    path: '/',
-    component: Home
+    name: "Home",
+    path: "/",
+    component: Home,
+    children: [
+      {
+        component: Main,
+        path: "",
+      },
+    ],
   },
   {
-    name: 'Test',
-    path: '/Test',
-    component: Test
-  }
-]
+    name: "SignUp",
+    path: "/signup",
+    component: SignUp,
+    children: [
+      {
+        component: FirstForm,
+        path: "",
+        name: "f1",
+      },
+      {
+        component: SecondForm,
+        path: "f2",
+        name: "f2",
+        beforeEnter: (to, from, next) => {
+          if (from.name !== "f1") next({ name: "f1" });
+          else next();
+        },
+      },
+      {
+        component: MailConfirmation,
+        path: "cf",
+        name: "cf",
+        beforeEnter: (to, from, next) => {
+          if (from.name !== "f2") next({ name: "f1" });
+          else next();
+        },
+      },
+    ],
+  },
+  {
+    name: "Test",
+    path: "/Test",
+    component: Test,
+  },
+];
 
 const router = createRouter({
   routes,
-  history: createWebHistory(process.env.BASE_URL)
-})
+  history: createWebHistory(process.env.base),
+});
 
-export default router
-
-
+export default router;

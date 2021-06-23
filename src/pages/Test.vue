@@ -1,153 +1,68 @@
 <template>
-  <div class="products_header">
-    <div class="products_title">Deals of the Day</div>
-    <div class="products_more mouse_cursor">
-      View All
-      <img draggable="false" src="../assets/icons/right-arrow-double.svg" />
-    </div>
-  </div>
-  <div class="cards_list_container">
-    <div
-      class="cards_list_left_control"
-      @click="left_scroll"
-      v-show="!isTouchDevice"
-    >
-      <img src="../assets/icons/left-chevron.svg" />
-    </div>
-    <div
-      class="cards_list_right_control"
-      @click="right_scroll"
-      v-show="!isTouchDevice"
-    >
-      <img src="../assets/icons/right-chevron.svg" />
-    </div>
-    <div class="cards_list_animator">
-      <div
-        class="cards_list_main"
-        ref="listScroll"
-        :class="[
-          isEndOfScrollLeft ? 'leftScrollOverAnim' : '',
-          isEndOfScrollRight ? 'rightScrollOverAnim' : '',
-        ]"
-      >
-        <div
-          class="cards_list_item"
-          :class="isLarge ? 'card_large_item' : 'card_small_item'"
-          v-for="i in 10"
-          :key="i"
-        >
-          <div class="cli_rate_and_count">
-            <div class="cli_rating">1.8</div>
-            <div class="cli_count">(35)</div>
+  <div class="container">
+    <form>
+      <h2>SignUp</h2>
+      <div class="inputer">
+        <div class="scroller">
+          <div class="p p1">
+            <label>Name</label>
+            <input type="text" />
+            <button @click="next">Next</button>
           </div>
-          <div class="cli_fav mouse_cursor">
-            <img class="cli_favtag" src="../assets/icons/tag.svg" />
-            <div class="cli_favcontent">
-              <img src="../assets/icons/add-to-fav.svg" />
-            </div>
-          </div>
-          <div class="cli_image">
-            <img
-              src="https://rukminim1.flixcart.com/image/150/150/ko62xzk0/plant-seed/4/k/y/2050-f-40-aero-seeds-original-imag2zjznggbyzxd.jpeg?q=70"
-            />
-          </div>
-          <div class="cli_title">
-            AFROJACK Men's Airsocks Explorer Running Shoes (Black)
-          </div>
-          <div v-show="isLarge" class="cli_description">
-            This premium sockliner features higher rebound properties while
-            providing excellent
-          </div>
-          <div class="cli_bottom">
-            <div class="cli_price">$3500</div>
-            <div class="cli_offer">$4000</div>
-            <div class="cli_addToCart">
-              <img src="../assets/icons/shopping-cart-white.svg" />
-            </div>
+          <div class="p p2">
+            <label>Contact</label>
+            <input type="text" />
+            <button @click="prev">Previous</button>
           </div>
         </div>
       </div>
-    </div>
+      <div class="bottom"></div>
+    </form>
   </div>
 </template>
 
 <script>
 export default {
-  props: {
-    isLarge: {
-      type: Boolean,
-      default: true,
-    },
-    products: {
-      type: Object,
-      default: () => {},
-    },
-  },
-  data() {
-    return {
-      isTouchDevice: false,
-      isEndOfScrollLeft: false,
-      isEndOfScrollRight: false,
-      lastScrollPosition: 0,
-    };
-  },
   methods: {
-    isTouchDeviceDecider() {
-      if (
-        "ontouchstart" in window ||
-        navigator.maxTouchPoints > 0 ||
-        navigator.msMaxTouchPoints > 0
-      ) {
-        this.isTouchDevice = true;
-      } else {
-        this.isTouchDevice = false;
-      }
+    next(e){
+      e.preventDefault();
+      const el = document.querySelector('.p1');
+      el.style.marginLeft = "-100%"
     },
-    left_scroll() {
-      let listScroll = this.$refs.listScroll;
-
-      listScroll.scrollLeft -= 400;
-      if (listScroll.scrollLeft === 0) this.scrollEvent();
-    },
-    right_scroll() {
-      let listScroll = this.$refs.listScroll;
-      listScroll.scrollLeft += 400;
-      if (
-        listScroll.scrollLeft ===
-        listScroll.scrollWidth - listScroll.clientWidth
-      )
-        this.scrollEvent();
-    },
-    scrollEvent() {
-      let listScroll = this.$refs.listScroll;
-      let maxScrollWidth = listScroll.scrollWidth - listScroll.clientWidth;
-
-      if (listScroll.scrollLeft === 0) {
-        this.isEndOfScrollLeft = true;
-        setTimeout(() => {
-          this.isEndOfScrollLeft = false;
-        }, 1000);
-      }
-      if (listScroll.scrollLeft === maxScrollWidth) {
-        this.isEndOfScrollRight = true;
-        setTimeout(() => {
-          this.isEndOfScrollRight = false;
-        }, 1000);
-      }
-    },
-  },
-  beforeMount() {
-    this.isTouchDeviceDecider();
-  },
-  mounted() {
-    this.$refs.listScroll.addEventListener("scroll", this.scrollEvent);
-  },
-  beforeUnmount() {
-    removeEventListener("scroll", this.scrollEvent);
-  },
-};
+    prev(e){
+      e.preventDefault();
+      const el = document.querySelector('.p1');
+      el.style.marginLeft = "0%"
+    }
+  }
+}
 </script>
 
 <style lang="sass" scoped>
-@import '../styles/test'
+.container
+  background: #e6e4cc
+  display: grid
+  form
+    justify-self: center
+    width: 40%
+    background: white
+    display: grid
+    grid-template-rows: 1fr 6fr 1fr
+    h2
+      justify-self: center
+    .bottom
+      background: red
+    .inputer
+      background: green
+      width: 100%
+      overflow: hidden
+      display: flex
+      .scroller
+        width: 200%
+        display: flex
+        .p
+          width: 100%
+          display: grid
+          input, label
+            margin: 10px
 </style>
