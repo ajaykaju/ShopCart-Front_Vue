@@ -3,10 +3,15 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../pages/Home";
 import Main from "../pages/innerPages/Main";
 
-import SignUp from "../pages/signup/SignUp";
-import FirstForm from "../pages/signup/FirstForm";
-import SecondForm from "../pages/signup/SecondForm";
-import MailConfirmation from "../pages/signup/MailConfirmation";
+//Signup
+import SignUp from "../pages/auth/signup/SignUp";
+import FirstForm from "../pages/auth/signup/FirstForm";
+import SecondForm from "../pages/auth/signup/SecondForm";
+import MailConfirmation from "../pages/auth/signup/MailConfirmation";
+
+
+//Login
+import Login from "../pages/auth/Login";
 
 import Test from "../pages/Test";
 
@@ -51,6 +56,11 @@ const routes = [
         },
       },
     ],
+  },
+  {
+    name: "LogIn",
+    path:'/login',
+    component: Login
   },
   {
     name: "Test",

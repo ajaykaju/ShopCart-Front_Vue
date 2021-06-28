@@ -53,4 +53,7 @@ export default {
   passwordValid(state) {
     return state.passwordValid;
   },
+  error(state) {
+    return state.error;
+  },
 };

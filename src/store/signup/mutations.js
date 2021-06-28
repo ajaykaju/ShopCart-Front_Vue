@@ -53,4 +53,16 @@ export default {
   passwordValidChanger(state, payload) {
     state.passwordValid = payload.passwordValid;
   },
+  errorChanger(state, payload) {
+    state.error = payload.error;
+  },
+
+  //to clear all auth values
+  valueChangerAll(state) {
+    state.fname = state.lname = state.email = state.dob = state.phoneNumber = state.password = state.error =
+      "";
+    state.fnameClass = state.lnameClass = state.emailClass = state.dobClass = state.phoneNumberClass = state.passwordClass =
+      "inputNormalWrap";
+    state.fnameValid = state.lnameValid = state.emailValid = state.dobValid = state.phoneNumberValid = state.passwordValid = false;
+  },
 };

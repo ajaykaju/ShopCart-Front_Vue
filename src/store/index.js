@@ -4,10 +4,12 @@ import productList from "../assets/dummyData/productList.json";
 import categoryList from "../assets/dummyData/categories.json";
 
 import signupModule from "./signup";
+import userModule from "./user";
 
 export default createStore({
   modules: {
     signup: signupModule,
+    user: userModule,
   },
   state() {
     return {

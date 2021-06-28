@@ -26,7 +26,7 @@
         />
         <transition name="tick-anim">
           <span class="validIcon" v-show="dobValid">
-            <img src="../../assets/icons/tick.svg" />
+            <img src="../../../assets/icons/tick.svg" />
           </span>
         </transition>
       </div>
@@ -50,7 +50,7 @@
         />
         <transition name="tick-anim">
           <span class="validIcon" v-show="phoneNumberValid">
-            <img src="../../assets/icons/tick.svg" />
+            <img src="../../../assets/icons/tick.svg" />
           </span>
         </transition>
       </div>
@@ -73,19 +73,35 @@
         />
         <transition name="tick-anim">
           <span class="validIcon" v-show="passwordValid">
-            <img src="../../assets/icons/tick.svg" />
+            <img src="../../../assets/icons/tick.svg" />
           </span>
         </transition>
       </div>
     </div>
 
-    <button type="submit" @click="$router.replace({ name: 'cf' })">
-      Continue
-    </button>
+    <div class="buttonandroute">
+      <button
+        type="submit"
+        @click="submit"
+        :class="formValid ? 'activeButton' : 'disabledButton'"
+      >
+        <span v-show="!submitted">SignUp </span>
+        <i class="fa fa-circle-o-notch fa-spin" v-show="submitted"></i>
+      </button>
+      <div class="route">
+        <div>Already have an account?</div>
+        <div class="link" @click="$router.push({ name: 'LogIn' })">
+          Login instead
+        </div>
+      </div>
+    </div>
 
     <div class="errorAndDots">
-      <div class="error" v-show="error">
-        An error occured. Please try again later
+      <div class="error" v-if="error">
+        <div class="container">
+          <div class="text">{{ error }}</div>
+          <img src="../../../assets/icons/error.svg" />
+        </div>
       </div>
       <div
         class="formDots"
@@ -101,16 +117,33 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 
+import axios from "axios";
+
 export default {
   data() {
     return {
-      error: true,
+      submitted: false,
     };
   },
   beforeCreate() {
     history.replaceState({ urlPath: "/signup" }, "", "/signup");
   },
   computed: {
+    ...mapGetters("signup", [
+      "fname",
+      "lname",
+      "email",
+      "dob",
+      "phoneNumber",
+      "password",
+      "dobClass",
+      "phoneNumberClass",
+      "passwordClass",
+      "dobValid",
+      "phoneNumberValid",
+      "passwordValid",
+      "error",
+    ]),
     dob_loc: {
       get() {
         return this.dob;
@@ -135,17 +168,11 @@ export default {
         this.passwordChanger({ password: value });
       },
     },
-    ...mapGetters("signup", [
-      "dob",
-      "phoneNumber",
-      "password",
-      "dobClass",
-      "phoneNumberClass",
-      "passwordClass",
-      "dobValid",
-      "phoneNumberValid",
-      "passwordValid",
-    ]),
+    formValid() {
+      if (this.dobValid && this.phoneNumberValid && this.passwordValid)
+        return true;
+      else return false;
+    },
   },
 
   methods: {
@@ -156,11 +183,54 @@ export default {
       "normalToActive",
       "validation",
       "inputingvalidation",
+      "errorChanger",
     ]),
+    async submit() {
+      if (this.formValid) {
+        const subButton = document.querySelector("button");
+        subButton.disabled = true;
+        this.submitted = !this.submitted;
+        await axios
+          .post(
+            `${process.env.VUE_APP_NODE_DEVELOPMENT_SERVER}/user`,
+            {
+              firstName: this.fname,
+              lastName: this.lname,
+              email: this.email,
+              password: this.password,
+              dob: this.dob,
+              phoneNumber: this.phoneNumber,
+            },
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "*/*",
+              },
+            }
+          )
+          .then((data) => {
+            console.log(data.status);
+            if (this.formValid) this.$router.replace({ name: "cf" });
+          })
+          .catch((error) => {
+            console.log(error.response.status);
+            this.errorChanger({
+              error: "An error occured. Please try again later",
+            });
+          });
+        setTimeout(() => {
+          this.errorChanger({
+            error: "",
+          });
+        }, 3000);
+        subButton.disabled = false;
+        this.submitted = !this.submitted;
+      }
+    },
   },
 };
 </script>
 
 <style lang="sass" scoped>
-@import '../../styles/signup/forms'
+@import '../../../styles/auth/forms'
 </style>

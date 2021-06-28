@@ -57,6 +57,16 @@ export default {
   passwordValidChanger(context, payload) {
     context.commit("passwordValidChanger", payload);
   },
+  errorChanger(context, payload) {
+    context.commit("errorChanger", payload);
+  },
+
+  //to clear all values
+
+  valueChangerAll(context) {
+    context.commit("valueChangerAll");
+  },
+
   ...normalToActive,
   ...inputingvalidation,
   ...validation,

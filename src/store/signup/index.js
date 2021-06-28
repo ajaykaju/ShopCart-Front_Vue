@@ -24,6 +24,7 @@ export default {
       dobValid: false,
       phoneNumberValid: false,
       passwordValid: false,
+      error: "",
     };
   },
   mutations,

@@ -2,7 +2,7 @@
   <div class="inputPage">
     <div class="dummyDiv"></div>
     <div class="verificationImage">
-      <img src="../../assets/icons/emailVerification.svg" />
+      <img src="../../../assets/icons/emailVerification.svg" />
     </div>
     <div class="thanksText">Thanks! One more step to go</div>
     <div class="confirmText">
@@ -33,5 +33,5 @@ export default {
 
 
 <style lang="sass" scoped>
-@import '../../styles/signup/forms'
+@import '../../../styles/auth/forms'
 </style>

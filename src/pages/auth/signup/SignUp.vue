@@ -1,9 +1,9 @@
 <template>
-  <div class="signupBackground">
-    <div class="signupContainer">
+  <div class="authBackground">
+    <div class="authContainer">
       <div class="formandImage">
-        <div class="signupImage topImage">
-          <img src="../../assets/images/signupimage.jpg" />
+        <div class="authImage topImage">
+          <img src="../../../assets/images/authimage.jpg" />
         </div>
         <div class="formContainer">
           <form @submit.prevent="formSubmitter">
@@ -11,19 +11,19 @@
             <h2>ShopCart</h2>
             <div>
               <router-view v-slot="{ Component }">
-                <transition name="signupslide" mode="out-in">
+                <transition name="authslide" mode="out-in">
                   <component :is="Component" />
                 </transition>
               </router-view>
             </div>
           </form>
         </div>
-        <div class="signupImage rightImage">
-          <img src="../../assets/images/signupimage.jpg" />
+        <div class="authImage rightImage">
+          <img src="../../../assets/images/authimage.jpg" />
         </div>
       </div>
 
-      <div class="signupFooter">
+      <div class="authFooter">
         <div class="links">
           <li>Home</li>
           <li>Privacy policy</li>
@@ -36,5 +36,6 @@
 </template>
 
 <style lang="sass" scoped>
-@import '../../styles/signup/signup'
+@import '../../../styles/auth/auth'
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
 </style>

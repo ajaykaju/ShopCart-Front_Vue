@@ -1,13 +1,15 @@
-.signupBackground
+.authBackground
     display: grid
     background: rgba(245, 245, 245, 1)
-    .signupContainer
+    position: relative
+    .authContainer
         display: grid
         grid-template-rows: auto auto
         width: 90%
         place-self: center
         max-width: 1150px
         margin: 20px
+        position: relative
         .formandImage
             display: grid
             background: white
@@ -21,18 +23,17 @@
                     grid-template-rows: 1fr 7fr
                     font-family: 'Roboto-Medium'
                     color: rgba(0, 0, 0, 0.7)
-                    overflow: hidden
                     h2
                         align-self: flex-end
                         margin-bottom: 0px
-            .signupImage
+            .authImage
                 position: relative
                 overflow: hidden
                 img
                     place-self: center
                     position: absolute
 
-        .signupFooter
+        .authFooter
             font-size: 11px
             display: grid
             color: rgba(0, 0, 0, 0.5)
@@ -49,22 +50,22 @@
                 place-self: center
                 margin-top: 8px
 
-.signupslide-enter-from
+.authslide-enter-from
     opacity: 0
     transform: translateX(100px)
-.signupslide-enter-active
+.authslide-enter-active
     transition: all 0.3s ease-out
 
-.signupslide-leave-to
+.authslide-leave-to
     opacity: 0
     transform: translateX(-100px)
 
-.signupslide
+.authslide
     transition: all 0.3s ease-in
 
 @media (min-width: 700px)
-    .signupBackground
-        .signupContainer
+    .authBackground
+        .authContainer
             .formandImage
                 grid-template-columns: 1fr 1fr
                 grid-template-rows: 1fr
@@ -83,8 +84,8 @@
                     height: 100%
 
 @media (max-width: 700px)
-    .signupBackground
-        .signupContainer
+    .authBackground
+        .authContainer
             .formandImage
                 grid-template-rows: 1fr 3fr
                 grid-template-columns: 1fr
@@ -103,16 +104,16 @@
                     height: 200%
 
 @media (min-width: 380px)
-    .signupBackground
-        .signupContainer
+    .authBackground
+        .authContainer
             .formandImage
                 .formContainer
                     form
                         width: 65%
 
 @media ( max-width:  380px)
-    .signupBackground
-        .signupContainer
+    .authBackground
+        .authContainer
             .formandImage
                 .formContainer
                     form
