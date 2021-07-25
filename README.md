@@ -1,24 +1,21 @@
 # shopcart
 
-## Project setup
-```
-npm install
-```
+ShopCart is an Shopping Web Application Completely made with Vue.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## ScreenShots
 
-### Lints and fixes files
-```
-npm run lint
-```
+### Home
+<img src="https://github.com/ajaykaju/ShopCart-Front_Vue/blob/main/ScreenShots/home.PNG?raw=true"/>
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Sidebar
+<img src="https://github.com/ajaykaju/ShopCart-Front_Vue/blob/main/ScreenShots/categories.PNG?raw=true"/>
+
+### Product
+<img src="https://github.com/ajaykaju/ShopCart-Front_Vue/blob/main/ScreenShots/Product.PNG?raw=true"/>
+
+### Login
+<img src="https://github.com/ajaykaju/ShopCart-Front_Vue/blob/main/ScreenShots/Login.PNG?raw=true"/>
+
+### SignUp
+<img src="https://github.com/ajaykaju/ShopCart-Front_Vue/blob/main/ScreenShots/signup.PNG?raw=true"/>
