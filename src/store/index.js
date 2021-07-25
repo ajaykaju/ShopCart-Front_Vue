@@ -1,6 +1,5 @@
+import axios from "axios";
 import { createStore } from "vuex";
-
-import productList from "../assets/dummyData/productList.json";
 import categoryList from "../assets/dummyData/categories.json";
 
 import signupModule from "./signup";
@@ -15,8 +14,10 @@ export default createStore({
     return {
       showMoreCateogories: false,
       isSideMenu: false,
-      products: productList.products,
+      products: [],
       categories: categoryList.items,
+
+      isProductsLoaded: false,
 
       isAnotherPage: false,
     };
@@ -28,6 +29,13 @@ export default createStore({
     isSideMenuChanger(state) {
       state.isSideMenu = !state.isSideMenu;
     },
+    loadProducts(state, payload) {
+      state.products = payload;
+    },
+
+    isProductsLoadedChanger(state, payload) {
+      state.isProductsLoaded = payload;
+    },
   },
   actions: {
     showMoreCateogoriesChanger(context) {
@@ -35,6 +43,23 @@ export default createStore({
     },
     isSideMenuChanger(context) {
       context.commit({ type: "isSideMenuChanger" });
+    },
+    async loadProducts(context) {
+      await axios
+        .get(`${process.env.VUE_APP_NODE_DEVELOPMENT_SERVER}/products`)
+        .then((res) => {
+          let ca = [];
+          for (let i = 0; i < 5; i++) ca = ca.concat(res.data);
+          context.commit("loadProducts", ca);
+          context.commit("isProductsLoadedChanger", true);
+        })
+        .catch(() => {
+          context.commit("isProductsLoadedChanger", false);
+        });
+    },
+
+    isProductsLoadedChanger(context, payload) {
+      context.commit("isProductsLoadedChanger", payload);
     },
   },
   getters: {
@@ -49,6 +74,10 @@ export default createStore({
     },
     categories(state) {
       return state.categories;
+    },
+
+    isProductsLoaded(state) {
+      return state.isProductsLoaded;
     },
   },
 });

@@ -108,8 +108,8 @@
         class="formDots"
         :class="error ? 'formDotsIfError' : 'formDotsAlone'"
       >
-        <div class="formDot" id="1"></div>
-        <div class="formDot" id="2"></div>
+        <div class="formDot formDotActive"></div>
+        <div class="formDot formDotNormal"></div>
       </div>
     </div>
   </div>
@@ -205,8 +205,7 @@ export default {
               },
             }
           )
-          .then((data) => {
-            console.log(data.status);
+          .then(() => {
             this.errorChanger({
               error: "",
             });

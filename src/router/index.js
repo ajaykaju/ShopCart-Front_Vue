@@ -9,9 +9,12 @@ import FirstForm from "../pages/auth/signup/FirstForm";
 import SecondForm from "../pages/auth/signup/SecondForm";
 import MailConfirmation from "../pages/auth/signup/MailConfirmation";
 
-
 //Login
 import Login from "../pages/auth/Login";
+
+import Product from "../pages/Product";
+
+import Category from "../pages/innerPages/Categories";
 
 import Test from "../pages/Test";
 
@@ -22,8 +25,19 @@ const routes = [
     component: Home,
     children: [
       {
+        name: "Main",
         component: Main,
         path: "",
+      },
+      {
+        name: "Product",
+        path: "/product/:pId",
+        component: Product,
+      },
+      {
+        name: "Categories",
+        path: "/category/:parent/",
+        component: Category,
       },
     ],
   },
@@ -59,8 +73,8 @@ const routes = [
   },
   {
     name: "LogIn",
-    path:'/login',
-    component: Login
+    path: "/login",
+    component: Login,
   },
   {
     name: "Test",

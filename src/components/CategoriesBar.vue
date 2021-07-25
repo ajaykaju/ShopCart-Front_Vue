@@ -1,7 +1,12 @@
 <template>
   <div class="category_bar">
     <div class="categories">
-      <div class="item mouse_cursor" v-for="item in categories" :key="item">
+      <div
+        class="item mouse_cursor"
+        v-for="item in categories"
+        :key="item"
+        @click="$router.push(`/category/${item.title}`)"
+      >
         <img v-if="item.image" :src="item.image" draggable="false" />
         <img
           draggable="false"
@@ -18,13 +23,11 @@
 </template>
 
 <script>
-
 import { mapActions, mapGetters } from "vuex";
 
 export default {
   data() {
-    return {
-    };
+    return {};
   },
   methods: {
     showAllCateogories() {
@@ -40,5 +43,5 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import '../styles/categories'
+@import '../styles/categorybar'
 </style>

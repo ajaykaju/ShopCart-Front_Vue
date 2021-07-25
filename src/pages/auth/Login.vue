@@ -8,7 +8,9 @@
         <div class="formContainer">
           <form @submit.prevent="submit">
             <!-- APP TITLE -->
-            <h2>ShopCart</h2>
+            <h2 @click="$router.push({ path: '/' })" class="mouse_cursor">
+              ShopCart
+            </h2>
             <div>
               <transition name="authslide" mode="out-in">
                 <div class="inputPage">
@@ -96,9 +98,10 @@
                       class="formDots"
                       :class="error ? 'formDotsIfError' : 'formDotsAlone'"
                     >
-                      <div class="formDot" id="1"></div>
+                      <div class="formDot formDotActive"></div>
                     </div>
                   </div>
+                  <div></div>
                 </div>
               </transition>
             </div>
@@ -111,7 +114,7 @@
 
       <div class="authFooter">
         <div class="links">
-          <li>Home</li>
+          <li @click="$router.push({ path: '/' })">Home</li>
           <li>Privacy policy</li>
           <li>Help</li>
         </div>
@@ -123,7 +126,6 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import axios from "axios";
 
 export default {
   data() {
@@ -162,8 +164,9 @@ export default {
       "passwordClass",
       "emailValid",
       "passwordValid",
-      "error",
     ]),
+
+    ...mapGetters("user", ["error"]),
   },
   methods: {
     ...mapActions("signup", [
@@ -172,43 +175,17 @@ export default {
       "normalToActive",
       "validation",
       "inputingvalidation",
-      "errorChanger",
       "valueChangerAll",
     ]),
+
+    ...mapActions("user", ["logIn"]),
+
     async submit() {
       if (this.formValid) {
         const subButton = document.querySelector("button");
         subButton.disabled = true;
         this.submitted = !this.submitted;
-        await axios
-          .post(
-            `${process.env.VUE_APP_NODE_DEVELOPMENT_SERVER}/user/login`,
-            {
-              email: this.email,
-              password: this.password,
-            },
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Accept: "*/*",
-              },
-            }
-          )
-          .then((data) => {
-            console.log(data.status);
-            if (this.formValid) console.log("Logged In");
-          })
-          .catch((error) => {
-            console.log(error.response.status);
-            this.errorChanger({
-              error: "An error occured. Please try again later",
-            });
-          });
-        setTimeout(() => {
-          this.errorChanger({
-            error: "",
-          });
-        }, 3000);
+        await this.logIn({ email: this.email, password: this.password });
         subButton.disabled = false;
         this.submitted = !this.submitted;
       }

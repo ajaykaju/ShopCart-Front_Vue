@@ -8,7 +8,9 @@
         <div class="formContainer">
           <form @submit.prevent="formSubmitter">
             <!-- APP TITLE -->
-            <h2>ShopCart</h2>
+            <h2 @click="$router.push({ path: '/' })" class="mouse_cursor">
+              ShopCart
+            </h2>
             <div>
               <router-view v-slot="{ Component }">
                 <transition name="authslide" mode="out-in">
@@ -25,7 +27,7 @@
 
       <div class="authFooter">
         <div class="links">
-          <li>Home</li>
+          <li @click="$router.push({ path: '/' })">Home</li>
           <li>Privacy policy</li>
           <li>Help</li>
         </div>

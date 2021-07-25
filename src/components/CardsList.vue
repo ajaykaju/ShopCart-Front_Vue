@@ -32,10 +32,11 @@
             card_small_item: !isLarge,
             item_marger: i !== products.length,
           }"
+          @click="$router.push(`/product/${product._id}`)"
         >
           <div class="cli_rate_and_count">
-            <div class="cli_rating">{{ product.ratingAndCount.rating }}</div>
-            <div class="cli_count">({{ product.ratingAndCount.count }})</div>
+            <div class="cli_rating">{{ product.rating }}</div>
+            <div class="cli_count">({{ "" }})</div>
           </div>
           <div class="cli_fav mouse_cursor">
             <img class="cli_favtag" src="../assets/icons/tag.svg" />
@@ -44,20 +45,20 @@
             </div>
           </div>
           <div class="cli_image">
-            <img :src="product.img" />
+            <img :src="product.images[0]" />
           </div>
           <div class="cli_title">
             {{ product.title }}
           </div>
           <div v-show="isLarge" class="cli_description">
-            {{ product.description }}
+            {{ product.briefDescription }}
           </div>
           <div class="cli_bottom">
-            <div class="cli_price">${{ product.priceAndOffer.offer }}</div>
-            <div class="cli_offer">{{ product.priceAndOffer.price }}</div>
-            <div class="cli_addToCart">
+            <div class="cli_price">${{ product.currentPrice }}</div>
+            <div class="cli_offer">{{ product.actualPrice }}</div>
+            <!-- <div class="cli_addToCart" @click="null">
               <img src="../assets/icons/shopping-cart-white.svg" />
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -73,8 +74,8 @@ export default {
       default: true,
     },
     products: {
-      type: Object,
-      default: () => {},
+      type: Array,
+      default: () => [],
     },
   },
   data() {
@@ -85,6 +86,7 @@ export default {
       lastScrollPosition: 0,
     };
   },
+  computed: {},
   methods: {
     isTouchDeviceDecider() {
       if (

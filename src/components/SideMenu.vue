@@ -13,8 +13,11 @@
             <div class="logo mouse_cursor">ShopCart<img src="" /></div>
           </div>
         </div>
-        <div class="menu_profile mouse_cursor">
-          <div class="circular">
+        <div class="menu_profile" :class="{ userActive: isLoggedIn }">
+          <div class="login" v-show="!isLoggedIn">
+            <button>LogIn</button>
+          </div>
+          <div class="circular" v-show="isLoggedIn">
             <div class="avatar"></div>
             <div :class="{ circle: isSideMenu }">
               <div class="bar left">
@@ -25,10 +28,17 @@
               </div>
             </div>
           </div>
-          <div :class="{ user: true, userFocus: isSideMenu }">
-            <span>Hello</span>
-            <div @click="cateogoriesFocuser">Abhinandan</div>
+          <div
+            class="user"
+            :class="{ userFocus: isSideMenu }"
+            v-show="isLoggedIn"
+          >
+            <span>Hello,&nbsp;</span>
+            <div @click="cateogoriesFocuser">
+              {{ user.firstName + " " + user.lastName }}
+            </div>
           </div>
+          <div class="viewProfile" v-show="isLoggedIn">View Profile</div>
         </div>
         <transition name="slideNormal">
           <div class="menu_contents" v-if="!menuItemOpen">
@@ -46,6 +56,7 @@
               @menuItemClick="itemOpenDecider"
               :isAnimated="true"
               :listLimitNeeded="catListLimitNeeded"
+              :isCategory="true"
             ></list-block>
             <hr />
             <list-block
@@ -53,7 +64,17 @@
               icon="settings-help.svg"
               :items="helpAndSettings"
               @menuItemClick="itemOpenDecider"
-            ></list-block>
+            >
+            </list-block>
+            <button
+              class="item"
+              id="sidebar_signout"
+              @click="signOut_loc"
+              v-show="isLoggedIn"
+            >
+              Sign Out
+              <i class="fa fa-circle-o-notch fa-spin" v-show="isSignOut"></i>
+            </button>
           </div>
           <div class="menu_contents" v-else>
             <div class="item_top mouse_cursor" @click="itemOpenDecider(null)">
@@ -62,7 +83,9 @@
             <list-block
               :title="itemContents.title"
               :items="itemContents.more"
-            ></list-block>
+              :isInnerCategory="true"
+            >
+            </list-block>
           </div>
         </transition>
       </div>
@@ -90,15 +113,15 @@ export default {
       menuItemOpen: false,
       itemContents: null,
       catListLimitNeeded: true,
+      isSignOut: false,
       trending: [
         { title: "Best Sellers" },
         { title: "Top Offers" },
         { title: "New Releases" },
       ],
-      helpAndSettings: [
+      helpAndSettingsList: [
         { title: "Your Account" },
         { title: "Customer Service" },
-        { title: "Sign Out" },
       ],
     };
   },
@@ -109,7 +132,16 @@ export default {
       );
       return items;
     },
-    ...mapGetters(["showMoreCateogories", "isSideMenu","categories"]),
+    helpAndSettings() {
+      if (this.isLoggedIn) return this.helpAndSettingsList;
+      else {
+        return this.helpAndSettingsList.filter(
+          (item) => item.title !== "Sign Out"
+        );
+      }
+    },
+    ...mapGetters(["showMoreCateogories", "isSideMenu", "categories"]),
+    ...mapGetters("user", ["user", "isLoggedIn"]),
   },
   watch: {
     isSideMenu(val) {
@@ -138,7 +170,7 @@ export default {
     },
     escapeMenuCloser(e) {
       if (e.key === "Escape") {
-        if (this.decider === true) this.menuDecider();
+        if (this.isSideMenu === true) this.menuDecider();
       }
     },
     itemOpenDecider(itemContents) {
@@ -152,6 +184,15 @@ export default {
         sideMenu.scrollTop = 370;
       }, 100);
     },
+    async signOut_loc() {
+      const subButton = document.getElementById("sidebar_signout");
+      subButton.disabled = true;
+      this.isSignOut = !this.isSignOut;
+      await this.signOut();
+      subButton.disabled = false;
+      this.isSignOut = !this.isSignOut;
+    },
+    ...mapActions("user", ["signOut"]),
     ...mapActions(["isSideMenuChanger", "showMoreCateogoriesChanger"]),
   },
 };
@@ -159,4 +200,5 @@ export default {
 
 <style lang="sass" scoped>
 @import ../styles/sidemenu
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
 </style>

@@ -10,7 +10,19 @@
           class="item"
           v-for="(item, index) in itemsForList"
           :key="index"
-          @click="item.more ? itemOpenDecider(item) : null"
+          @click="
+            item.more
+              ? itemOpenDecider(item)
+              : isCategory
+              ? $router.push(`/category/${item.title}`)
+              : isInnerCategory
+              ? $router.push(
+                  `/category/${title}?brand=${item.title
+                    .toString()
+                    .toLowerCase()}`
+                )
+              : $router.push('/')
+          "
         >
           <div class="item_title">{{ item.title }}</div>
           <img
@@ -65,6 +77,18 @@ export default {
       type: String,
       default: "",
     },
+    isCategory: {
+      type: Boolean,
+      default: false,
+    },
+    isInnerCategory: {
+      type: Boolean,
+      default: false,
+    },
+    link: {
+      type: String,
+      default: "/",
+    },
   },
   data() {
     return {
@@ -109,6 +133,12 @@ export default {
         this.menuItemLimit -= this.listLimit;
         this.expand = !this.expand;
       }
+    },
+
+    clickDecider(item) {
+      this.$router.push({
+        path: `/category?parent=${item}&path=`,
+      });
     },
   },
   mounted() {

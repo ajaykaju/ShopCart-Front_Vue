@@ -6,11 +6,10 @@ export default {
   namespaced: true,
   state() {
     return {
-      fname: "",
-      lname: "",
-      email: "",
-      phoneNumber: "",
-      dob: "",
+      user: {},
+      isLoggedIn: false,
+      authToken: "",
+      error: "",
     };
   },
   mutations,

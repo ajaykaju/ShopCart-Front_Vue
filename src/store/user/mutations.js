@@ -1,17 +1,17 @@
 export default {
-  fnameChanger(state, payload) {
-    state.fname = payload.fname;
+  userChanger(state, payload) {
+    state.user = payload.user;
   },
-  lnameChanger(state, payload) {
-    state.lname = payload.lname;
+
+  isLoggedInChanger(state, payload) {
+    state.isLoggedIn = payload.isLoggedIn;
   },
-  emailChanger(state, payload) {
-    state.email = payload.email;
+
+  authTokenChanger(state, payload) {
+    state.authToken = payload.authToken;
   },
-  dobChanger(state, payload) {
-    state.dob = payload.dob;
-  },
-  phoneNumberChanger(state, payload) {
-    state.phoneNumber = payload.phoneNumber;
+
+  errorChanger(state, payload) {
+    state.error = payload.error;
   },
 };

@@ -1,17 +1,14 @@
 export default {
-  fname(state) {
-    return state.fname;
+  user(state) {
+    return state.user;
   },
-  lname(state) {
-    return state.lname;
+  isLoggedIn(state) {
+    return state.isLoggedIn;
   },
-  email(state) {
-    return state.email;
+  authToken(state) {
+    return state.authToken;
   },
-  dob(state) {
-    return state.dob;
-  },
-  phoneNumber(state) {
-    return state.phoneNumber;
+  error(state) {
+    return state.error;
   },
 };
